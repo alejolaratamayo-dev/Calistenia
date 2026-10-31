@@ -38,7 +38,7 @@ input,select{padding:11px;border:1px solid var(--bd);border-radius:10px;backgrou
 #lb img{max-width:94%;max-height:90%;border-radius:10px}
 details summary{cursor:pointer;color:var(--mu);font-size:15px}
 </style>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"></head><body>
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#0b1118"><link rel="apple-touch-icon" href="icon-192.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"></head><body>
 <main>
 <h1>💪 Ranking de Calistenia</h1>
 <div class="mu" id="wk"></div>
@@ -143,4 +143,5 @@ function init(){
  sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
  sb.auth.getSession().then(function(r){var ss=r.data&&r.data.session;if(ss)boot(ss.user);else{$("msg").style.display="none";$("lg").style.display="block"}})}
 init();
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
 </script></body></html>
