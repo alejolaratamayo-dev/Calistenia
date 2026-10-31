@@ -25,13 +25,9 @@ jobs:
           npx cap sync android
       - name: Icono
         run: |
+          npm i sharp
           rm -rf android/app/src/main/res/mipmap-anydpi-v26
-          for d in mdpi:48 hdpi:72 xhdpi:96 xxhdpi:144 xxxhdpi:192; do
-            n=${d%%:*}; s=${d##*:}
-            for f in ic_launcher ic_launcher_round ic_launcher_foreground; do
-              convert icon-512.png -resize ${s}x${s} android/app/src/main/res/mipmap-$n/$f.png
-            done
-          done
+          node -e "const s=require('sharp');(async()=>{for(const [n,z] of [['mdpi',48],['hdpi',72],['xhdpi',96],['xxhdpi',144],['xxxhdpi',192]]){for(const f of ['ic_launcher','ic_launcher_round','ic_launcher_foreground']){await s('icon-512.png').resize(z,z).toFile('android/app/src/main/res/mipmap-'+n+'/'+f+'.png')}}})()"
       - name: Compilar
         run: |
           cd android
